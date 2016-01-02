@@ -1,12 +1,11 @@
-#  _*_ coding:gbk _*_
+#  _*_ coding:utf-8 _*_
 
 import xlrd 
 import os
 import sys
+import re
 
-def statisticsForData():
-	s = "你好"
-	print(s)
+def statisticsForData(): 
 	sheet = xlrd.open_workbook("subset.xls").sheet_by_index(0)
 	print(os.path.abspath(os.path.dirname(sys.argv[0])))
 	path = "C:\\Users\YANG\Desktop\KPI资料\Data\数据\\"
@@ -36,16 +35,35 @@ def statisticsForData():
 
 
 def REHtml():
-	file = open("c:\\Users\yang\Desktop\PM.html")
-	file.read()
-	file.close()
-	print(line)
-
-
-
+	file = open(os.getcwd()+"\PM.html",'r',encoding="utf-8")
+	patt = re.compile(".*仙林大学城</span><span class=\"lv5\">\d*</span><span class=\"aqis\">\d*</span>.*")
+	while(file.readline()):
+		s = file.readline()
+		
+		obj = re.match(patt, s)
+		if(obj):
+			print(obj)
+			
+		if("仙林大学城"in s):
+			print( s)
+			
+	file.close() 
 
 if __name__=="__main__":
 	REHtml()
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
